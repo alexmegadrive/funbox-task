@@ -63,6 +63,15 @@
       background-size: 368px 360px;
       content: '';
     }
+    &::after {
+      //   position: absolute;
+      //   content: '';
+      //   top: 0;
+      //   left: 0;
+      //   width: 43px;
+      //   height: 43px;
+      //   background: linear-gradient(-45deg, #fff, #fff 28.5px, #1698d9 0, #1698d9 32px, transparent 0);
+    }
   }
 
   &__header,
@@ -119,15 +128,25 @@
     line-height: 16px;
   }
   &__description,
-  &__description-selected {
+  &__description-selected,
+  &__description-not-available {
     font-size: 13px;
     line-height: 15.23px;
     text-align: center;
     color: white;
     margin-top: 14px;
   }
-  &__description-selected {
+  &__description-selected,
+  &__description-not-available {
     display: none;
+  }
+  &__description-not-available {
+    color: #ffff66;
+  }
+  &__buy-link {
+    color: #2ea8e6;
+    border-bottom: 1px dashed #2ea8e6;
+    cursor: pointer;
   }
 }
 
@@ -159,16 +178,17 @@
     display: block;
   }
 }
-.card__radio-select:checked + .card__wrapper .card__body--selected:hover {
+.card__radio-select:checked + .card__wrapper--selected:hover {
   //   .card__body {
   border: 4px solid #e52e7a;
+
   & .size__container {
     background: #e52e7a;
   }
-  .card__header-selected {
+  & .card__header-selected {
     display: block;
   }
-  .card__header {
+  & .card__header {
     display: none;
   }
 }
@@ -177,9 +197,6 @@
   border: 4px solid #2ea8e6;
   & .size__container {
     background: #2ea8e6;
-  }
-  & .card__description-selected {
-    display: none;
   }
 }
 .card__radio-select:disabled + .card__wrapper .card__body {
@@ -197,12 +214,15 @@
   .size__measure {
     color: white !important;
   }
-
-  //   border: 4px solid red;
+}
+.card__radio-select:disabled ~ .card__description-not-available {
+  display: block;
+}
+.card__radio-select:disabled ~ .card__description {
+  display: none;
 }
 
 .size {
-  // .size__container
   &__container {
     display: flex;
     display: flex;
@@ -222,17 +242,11 @@
     color: white;
   }
 
-  // .size__count
-
   &__count {
     font-family: 'Trebuchet MS';
     font-size: 42px;
     line-height: 22px;
-
-    // color: #ffffff;
   }
-
-  // .size__measure
 
   &__measure {
   }
