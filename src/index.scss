@@ -1,5 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;400;700&display=swap');
+$cardDefault: #1698d9;
+$cardDefaultHover: #2ea8e6;
+$cardSelected: #d91667;
+$cardSelectedHover: #e52e7a;
 
+@font-face {
+  font-family: 'Exo 2';
+  src: url('./assets/fonts/Exo2.0-Thin.otf') format('opentype');
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,8 +21,6 @@
 }
 
 .cards-section {
-  // .cards-section__title
-
   &__title {
     color: #ffffff;
     font-size: 36px;
@@ -24,8 +29,6 @@
     text-align: center;
     text-shadow: 0px 1px 1px #000000;
   }
-
-  // .cards-section__cards-container
 
   &__cards-container {
     display: flex;
@@ -36,9 +39,8 @@
 
 .card {
   &__container {
+    position: relative;
     margin: 25px 40px;
-  }
-  &__wrapper {
   }
 
   &__body {
@@ -48,8 +50,19 @@
     padding: 21px 0 0 48px;
     border: 4px solid #1698d9;
     border-radius: 12px;
-    background: white;
+    background: #f2f2f2;
+    clip-path: polygon(16% 0, 100% 0, 100% 100%, 0 100%, 0 10%);
     cursor: pointer;
+    &::after {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(-45deg, #f2f2f2, #f2f2f2 34.5px, #1698d9 0, #1698d9 39px, transparent 0);
+      content: '';
+    }
+
     &::before {
       position: absolute;
       top: 0px;
@@ -63,15 +76,6 @@
       background-size: 368px 360px;
       content: '';
     }
-    &::after {
-      //   position: absolute;
-      //   content: '';
-      //   top: 0;
-      //   left: 0;
-      //   width: 43px;
-      //   height: 43px;
-      //   background: linear-gradient(-45deg, #fff, #fff 28.5px, #1698d9 0, #1698d9 32px, transparent 0);
-    }
   }
 
   &__header,
@@ -83,15 +87,11 @@
     line-height: 19px;
   }
 
-  // .card__header--selected
-
   &__header-selected {
-    padding-left: 3px;
     display: none;
+    padding-left: 3px;
     color: #e62e7a;
   }
-
-  // .card__title
 
   &__title {
     margin-top: 5px;
@@ -101,8 +101,6 @@
     line-height: 56px;
   }
 
-  // .card__sub-title
-
   &__sub-title {
     color: #000000;
     font-family: 'Trebuchet MS';
@@ -110,14 +108,10 @@
     line-height: 28px;
   }
 
-  // .card__benefits
-
   &__benefits {
     margin-top: 14px;
     list-style: none;
   }
-
-  // .card__benefit
 
   &__benefit {
     color: #666666;
@@ -130,11 +124,11 @@
   &__description,
   &__description-selected,
   &__description-not-available {
+    margin-top: 14px;
+    color: white;
     font-size: 13px;
     line-height: 15.23px;
     text-align: center;
-    color: white;
-    margin-top: 14px;
   }
   &__description-selected,
   &__description-not-available {
@@ -144,13 +138,12 @@
     color: #ffff66;
   }
   &__buy-link {
-    color: #2ea8e6;
     border-bottom: 1px dashed #2ea8e6;
+    color: #2ea8e6;
     cursor: pointer;
   }
 }
 
-//checked styles
 .card__radio-select {
   position: absolute;
   width: 1px;
@@ -166,8 +159,11 @@
 }
 
 .card__radio-select:checked + .card__wrapper .card__body {
-  //   .card__body {
   border: 4px solid #d91667;
+  &::after {
+    background: linear-gradient(-45deg, #f2f2f2, #f2f2f2 34.5px, #d91667 0, #d91667 39px, transparent 0);
+  }
+
   & .size__container {
     background: #d91667;
   }
@@ -178,10 +174,12 @@
     display: block;
   }
 }
-.card__radio-select:checked + .card__wrapper--selected:hover {
-  //   .card__body {
+.card__radio-select:checked + .card__wrapper--selected:hover .card__body {
   border: 4px solid #e52e7a;
 
+  &::after {
+    background: linear-gradient(-45deg, #f2f2f2, #f2f2f2 34.5px, #e52e7a 0, #e52e7a 39px, transparent 0);
+  }
   & .size__container {
     background: #e52e7a;
   }
@@ -193,14 +191,19 @@
   }
 }
 .card__radio-select:not(:checked):not(:disabled) + .card__wrapper .card__body:hover {
-  //   .card__body {
   border: 4px solid #2ea8e6;
+  &::after {
+    background: linear-gradient(-45deg, #f2f2f2, #f2f2f2 34.5px, #2ea8e6 0, #2ea8e6 39px, transparent 0);
+  }
   & .size__container {
     background: #2ea8e6;
   }
 }
 .card__radio-select:disabled + .card__wrapper .card__body {
   border: 4px solid #b3b3b3;
+  &::after {
+    background: linear-gradient(-45deg, #f2f2f2, #f2f2f2 34.5px, #b3b3b3 0, #b3b3b3 39px, transparent 0);
+  }
   &::before {
     opacity: 0.5;
   }
@@ -249,5 +252,8 @@
   }
 
   &__measure {
+    font-family: 'Trebuchet MS';
+    font-size: 20px;
+    line-height: 22px;
   }
 }
